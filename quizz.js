@@ -98,8 +98,7 @@ function verificarResposta(indexSelecionado) {
 
     if (indexSelecionado === perguntaAtual.respostaCorreta) {
         pontuacao++;
-        // MELHORIA: Toca o som de acerto
-        somAcertoEl.play();
+
         mostrarModal("Você acertou!");
     } else {
         somErroEl.play();
