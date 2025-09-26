@@ -9,13 +9,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* CORREÇÃO: 100vh para ocupar a tela inteira */
+    min-height: 100vh;
     margin: 0;
-    padding: 15px; /* Adiciona um respiro nas laterais */
-    box-sizing: border-box; /* Garante que o padding não estoure a tela */
+    padding: 15px;
+    box-sizing: border-box;
     text-align: center;
-    overflow: hidden;
-    /* CORREÇÃO: Caminho da imagem corrigido */
+    overflow-x: hidden;
     background-image: url("../imagens/FUNDO_TELA_MOVE.gif");
     background-size: cover;
     background-position: center;
@@ -30,13 +29,13 @@ body {
 
 header {
     width: 100%;
-    margin-top: -150px;
-    margin-bottom: 5px; /* Separando do conteúdo */
+    margin-top: -60px;
+    margin-bottom: 5px;
     font-family: "Lobster Two", sans-serif;
-    font-size: clamp(32px, 5vw, 50px); /* Fonte responsiva */
+    font-size: clamp(32px, 5vw, 50px);
     color: rgb(245, 168, 25);
     text-shadow: 10px 8px 1px rgba(10, 10, 0, 0.8);
-    transition: all 0.3s ease; /* Transição mais suave */
+    transition: all 0.3s ease;
 }
 
 header:hover {
@@ -46,24 +45,27 @@ header:hover {
 
 h2{
     font-family: "Playfair Display", serif;
-    font-size: clamp(20px, 3vw, 24px); /* Fonte responsiva */
-    margin: -30px 30px; /* Margens mais consistentes */
+    font-size: clamp(20px, 3vw, 24px);
+    margin: -30px 30px;
     color: white;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.9);
 }
 
+/* OTIMIZAÇÃO 1: Imagem agora responsiva e com tamanho máximo/mínimo */
 img{
-    width: 150px;
-    height: 150px;
+    width: clamp(100px, 20vw, 150px); /* Reduz em telas menores, mas tem um mínimo de 100px */
+    height: auto; /* Mantém a proporção */
+    max-width: 150px;
+    max-height: 150px;
     border-radius: 20%;
 }
 
 /* Estilo base para parágrafos */
 p {
-    font-size: clamp(16px, 2.5vw, 18px); /* Fonte responsiva */
+    font-size: clamp(16px, 2.5vw, 18px);
     line-height: 1.5;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.9);
-    margin: 10px auto; /* Margens mais consistentes */
+    margin: 10px auto;
 }
 
 .fontIndex {
@@ -76,7 +78,7 @@ p {
     max-width:1000px;
     font-family: "Bree Serif", serif;
     font-weight: bold;
-    font-size: clamp(24px, 4vw, 30px); /* Fonte responsiva */
+    font-size: clamp(24px, 4vw, 30px);
     margin: 20px 0;
     color: white;
     text-shadow: 1px 4px 2px rgba(50, 3, 3, 0.9);
@@ -86,9 +88,19 @@ p {
 /* CAIXAS DE CONTEÚDO PRINCIPAL       */
 /* ========================================= */
 
-/* Base para as caixas do Quiz e do Index (Princípio DRY) */
+/* Garante que o container principal ocupe todo o espaço e centralize o conteúdo */
+#game-container {
+    flex-grow: 1; 
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* OTIMIZAÇÃO 3: Containers principais agora com max-width responsivo e width de 95% para fluidz */
 .caixa-principal {
-    width: 1000px;
+    width: 95%; /* Ajuste: Usa 95% da largura por padrão */
+    max-width: 1000px; /* Ajuste: Limite máximo mantido */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,9 +114,9 @@ p {
 }
 
 .orientacaoIndex {
-    width: 1000px;
-    margin-top: 75px;
+    width: 95%; /* Ajuste: Usa 95% da largura por padrão */
     max-width: 1000px;
+    margin-top: 75px;
     min-height: 340px;
     padding: 10px;
     justify-content: center;
@@ -122,10 +134,10 @@ p {
 }
 
 .orientacao {
-    width: 880px;
+    width: 95%; /* Ajuste: Usa 95% da largura por padrão */
     max-width: 880px;
     min-height: 380px;
-    margin-top: -40px;
+    margin-top: 10px; /* OTIMIZAÇÃO 2: Removida a margem negativa do estilo base */
 }
 
 #alternativas {
@@ -159,7 +171,7 @@ p {
     background-color: transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease-in-out;
-    text-decoration: none; /* Remove sublinhado de links */
+    text-decoration: none;
 }
 
 .button-style:hover {
@@ -173,17 +185,39 @@ p {
 #alternativas button {
     width: 85%;
     gap:5px;
-    composes: button-style; /* Reutiliza o estilo base */
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    color: aliceblue;
+    text-shadow: 1px 4px 2px rgba(0, 0, 0, 1);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
     font-family: "Bree Serif", serif;
-
 }
 
 /* Estilo específico para o link/botão da página inicial */
 #btnIndex {
-    composes: button-style; /* O mesmo que acima */
+    display: block;
+    width: 95%;
+    margin: 10px auto;
+    padding: 10px;
     color: orange;
-    font-family: "Playfair Display", serif;
+    text-shadow: 1px 4px 2px rgba(0, 0, 0, 1);
+    border: none;
     font-size: 25px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    font-family: "Playfair Display", serif;
     font-weight: bold;
 }
 
@@ -193,10 +227,10 @@ p {
 
 .modal-overlay {
     position: fixed;
-    bottom: -600px;
+    top: 0;
     left: 0;
-    width: 900px; /* CORREÇÃO: Cobrir a tela toda */
-    height: 30px; /* CORREÇÃO: Cobrir a tela toda */
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
     display: flex;
@@ -211,18 +245,21 @@ p {
     border-radius: 10px;
     box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 900px;
-    max-width: 900px; /* Um pouco menor para melhor leitura */
-    color: #333; /* Cor escura para texto em fundo branco */
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    color: #333;
 }
 
 .modal-conteudo p {
     margin: 2px;
     font-family: "Lobster Two", sans-serif;
+    color: #333;
+    font-size: clamp(16px, 4vw, 24px);
 }
 
 .hidden {
-    display: none !important; /* !important para garantir que vai sobrescrever */
+    display: none !important;
 }
 
 /* ========================================= */
@@ -232,7 +269,8 @@ p {
 #progresso-container {
     width: 95%;
     margin-bottom: 5px;
-    margin-top:-60px;
+    /* OTIMIZAÇÃO 2: Removida a margem negativa base - será ajustada no mobile */
+    margin-top: 10px;
 }
 
 #progresso-texto {
@@ -257,18 +295,19 @@ p {
 }
 
 /* ========================================= */
-/* RODAPÉ (FOOTER)              */
+/* RODAPÉ (FOOTER) - NO FLUXO NORMAL (ESTÁTICO) */
 /* ========================================= */
 
 footer {
-    position: absolute;
-    bottom: 40px;
-    left: 47.6%;
-    transform: translateX(-50%);
-    width: 840px;
+    /* Garante que o footer flua normalmente após o conteúdo principal */
+    position: static; 
+    margin-top: 40px; 
+    margin-bottom: 40px; 
+    width: 90%; 
     max-width: 840px;
-    height: 30px;
+    height: auto;
     font-family: "Lobster Two", sans-serif;
+    align-self: center; 
 }
 
 /* Estilo combinado para os créditos */
@@ -283,6 +322,94 @@ footer {
 }
 
 #credits p, #creditsIndex p {
-    margin: 4px auto; /* Espaçamento menor para os créditos */
+    margin: 4px auto;
     font-family: "Lobster Two", sans-serif;
+}
+
+
+/* ========================================================================================= */
+/* RESPONSIVIDADE (TELA MENOR QUE 414PX - CELULARES)                                         */
+/* ========================================================================================= */
+
+@media (max-width: 414px) {
+    /* CORREÇÃO: Ajusta o header para telas muito pequenas */
+    header {
+        margin-top: -80px;
+        font-size: clamp(28px, 10vw, 40px);
+    }
+
+    /* Reduz a margem do subtítulo */
+    h2 {
+        margin: -10px 10px 10px;
+    }
+
+    /* OTIMIZAÇÃO 2: Ajuste da margem do progresso para mobile */
+    #progresso-container {
+        margin-top: 0; /* Remove a margem superior problemática */
+    }
+
+    /* OTIMIZAÇÃO 2: Espaçamento ajustado na orientação do quizz */
+    .orientacao {
+        margin-top: 10px; /* Garante que o progresso não fique grudado */
+        min-height: 300px;
+    }
+
+    /* Reduz o tamanho dos containers principais para caber na tela */
+    .orientacaoIndex, .orientacao {
+        width: 95vw;
+        max-width: 95vw;
+        min-height: auto;
+        padding: 10px;
+    }
+
+    /* Reduz o tamanho do texto do corpo */
+    p, .fontIndex {
+        font-size: clamp(14px, 4vw, 16px);
+    }
+
+    /* Reduz o tamanho do texto da pergunta */
+    #pergunta {
+        font-size: clamp(20px, 6vw, 24px);
+        margin: 10px 0;
+    }
+
+    /* Reduz o tamanho dos botões de alternativa */
+    #alternativas button {
+        width: 90%;
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    /* Reposiciona e redimensiona o footer */
+    footer {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        width: 95%;
+    }
+
+    #credits, #creditsIndex {
+        font-size: 12px;
+        padding: 5px;
+        box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.693);
+    }
+}
+
+/* ========================================================================================= */
+/* RESPONSIVIDADE (AJUSTES DE ZOOM E FLUIDEZ)                                                */
+/* Mantido como backup, mas a fluidez já é garantida por unidades relativas e fluxbox.        */
+/* ========================================================================================= */
+
+@media (max-width: 600px) and (min-resolution: 1.1dppx), (min-resolution: 1.1dppx) and (max-width: 414px) {
+    body {
+        padding: 5px;
+    }
+
+    .orientacaoIndex, .orientacao {
+        padding: 5px;
+    }
+    
+    #alternativas button {
+        margin: 5px auto;
+        padding: 6px;
+    }
 }
