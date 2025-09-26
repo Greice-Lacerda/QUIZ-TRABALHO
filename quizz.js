@@ -37,7 +37,7 @@ function iniciarNovoJogo() {
         const j = Math.floor(Math.random() * (i + 1));
         [perguntasEmbaralhadas[i], perguntasEmbaralhadas[j]] = [perguntasEmbaralhadas[j], perguntasEmbaralhadas[i]];
     }
-    perguntasDaRodada = perguntasEmbaralhadas.slice(0, 10);
+    perguntasDaRodada = perguntasEmbaralhadas.slice(0, 5);
     mostrarPergunta();
 }
 
@@ -67,7 +67,7 @@ function verificarResposta(indexSelecionado) {
     const perguntaAtual = perguntasDaRodada[perguntaAtualIndex];
     if (indexSelecionado === perguntaAtual.respostaCorreta) {
         pontuacao++;
-        document.getElementById('somAcerto').play();
+        
         mostrarModal("Você acertou!");
     } else {
         document.getElementById('somErro').play();

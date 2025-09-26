@@ -12,7 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-image: url("./FUNDO_TELA_MOVE.gif");
+  background-image: url("./img/FUNDO_TELA_MOVE.gif");
   background-size: cover;
   background-position: center; /* Centraliza a imagem */
   background-repeat: no-repeat; /* Evita que a imagem se repita */
@@ -274,53 +274,4 @@ button:hover {
     border-radius: 10px;
     /* Efeito de transição suave quando a largura mudar! */
     transition: width 0.5s ease-in-out;
-}
-
-/* =================================================================== */
-/* FORÇAR ROTAÇÃO E AJUSTAR ESCALA EM TELAS PEQUENAS (MODO RETRATO)      */
-/* =================================================================== */
-
-/* Aplica a regra para todas as telas de até 768px em modo retrato */
-@media screen and (max-width: 768px) and (orientation: portrait) {
-
-/* ================================================= */
-  /* PASSO 1: REMOVE O FUNDO ESTÁTICO DO HTML          */
-  /* ================================================= */
-  html {
-    background: none !important; /* Força a remoção de qualquer fundo */
-    background-color: #000; /* Adiciona um fundo preto para preencher */
-  }
-  
-body {
-    /* Congela o tamanho original da tela, invertendo os eixos */
-    width: 100vh;
-    height: 100vw;
-
-    /* Posicionamento e origem para centralização */
-    position: absolute;
-    margin-top: 100px;
-    left: 50%;
-    transform-origin: center;
-
-    /* Posicionamento e origem para centralização */
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: center;
-    transform: rotate(90deg) scale(0.8) translate(-1%, -1%);
-    
-    /* Desabilita o scroll */
-    overflow: hidden;
-  }
-
-  header, h2, h3, h4, p, .fontIndex, #pergunta, button, #credits, #creditsIndex {
-    font-size: 100%;
-  }
-
-  #credits{
-    width: 90vh;
-    margin-bottom: -150px;
-    left: 50%;
-  }
-
 }
