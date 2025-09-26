@@ -145,7 +145,7 @@ function mostrarTelaFinal() {
     } else {
         // CORREÇÃO: Usando a variável correta para tocar o som (somPesarEl)
         if (somPesarEl) somPesarEl.play();
-        mensagemFinalHTML = `<h2>Não foi desta vez... 😢</h2>
+        mensagemFinalHTML = `<img src="../imagens/Triste.gif" alt="Triste perdedor" class="imagem-final">
                              <p>Você acertou ${porcentagemAcertos}% das perguntas.</p>
                              <p>Continue estudando e tente novamente!</p>`;
     }

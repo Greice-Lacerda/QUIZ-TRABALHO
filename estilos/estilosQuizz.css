@@ -30,7 +30,8 @@ body {
 
 header {
     width: 100%;
-    margin-bottom: 20px; /* Separando do conteúdo */
+    margin-top: -150px;
+    margin-bottom: 5px; /* Separando do conteúdo */
     font-family: "Lobster Two", sans-serif;
     font-size: clamp(32px, 5vw, 50px); /* Fonte responsiva */
     color: rgb(245, 168, 25);
@@ -43,21 +44,36 @@ header:hover {
     text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8);
 }
 
+h2{
+    font-family: "Playfair Display", serif;
+    font-size: clamp(20px, 3vw, 24px); /* Fonte responsiva */
+    margin: -30px 30px; /* Margens mais consistentes */
+    color: white;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.9);
+}
+
+img{
+    width: 150px;
+    height: 150px;
+    border-radius: 20%;
+}
+
 /* Estilo base para parágrafos */
 p {
     font-size: clamp(16px, 2.5vw, 18px); /* Fonte responsiva */
+    line-height: 1.5;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.9);
-    margin: 10px 0; /* Margens mais consistentes */
+    margin: 10px auto; /* Margens mais consistentes */
 }
 
 .fontIndex {
     font-family: "Playfair Display", serif;
     font-size: clamp(18px, 3vw, 20px);
-    margin: 15px 0;
+    margin: 10px auto;
 }
 
 #pergunta {
-    max-width: 95%;
+    max-width:1000px;
     font-family: "Bree Serif", serif;
     font-weight: bold;
     font-size: clamp(24px, 4vw, 30px); /* Fonte responsiva */
@@ -72,12 +88,13 @@ p {
 
 /* Base para as caixas do Quiz e do Index (Princípio DRY) */
 .caixa-principal {
+    width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background-color: rgba(0, 255, 255, 0.337);
+    padding: 10px;
+    background-color: rgba(0, 255, 255, 0.212);
     box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.693);
     border-radius: 10px;
     text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.9);
@@ -85,24 +102,30 @@ p {
 }
 
 .orientacaoIndex {
-    width: 90%;
-    max-width: 860px;
-    min-height: 400px;
+    width: 1000px;
+    margin-top: 75px;
+    max-width: 1000px;
+    min-height: 340px;
+    padding: 10px;
+    justify-content: center;
     transition: all 0.3s ease;
+    background-color: rgba(0, 255, 255, 0.193);
+    border-radius: 10px;
 }
 
 .orientacaoIndex:hover {
-    transform: scale(1.02);
+    transform: scale(1);
     box-shadow: 15px 15px 8px rgba(0, 0, 0, 0.693);
-    background-color: rgba(14, 52, 156, 0.821);
-    color: black;
+    background-color: rgba(64, 206, 3, 0.897);
+    color: white;
     text-shadow: 1px 4px 3px rgba(255, 255, 255, 0.9);
 }
 
 .orientacao {
-    width: 90%;
-    max-width: 760px;
-    min-height: 390px;
+    width: 880px;
+    max-width: 880px;
+    min-height: 380px;
+    margin-top: -40px;
 }
 
 #alternativas {
@@ -113,7 +136,7 @@ p {
     justify-content: center;
     border-radius: 10px;
     background-color: rgba(0, 255, 255, 0.337);
-    padding: 10px;
+    padding: 8px;
     box-sizing: border-box;
 }
 
@@ -149,10 +172,9 @@ p {
 /* Aplica o estilo base nos botões do quiz */
 #alternativas button {
     width: 85%;
-    gap:10px;
+    gap:5px;
     composes: button-style; /* Reutiliza o estilo base */
     font-family: "Bree Serif", serif;
-    font-weight: bold;
 
 }
 
@@ -171,33 +193,32 @@ p {
 
 .modal-overlay {
     position: fixed;
-    top: 0;
+    bottom: -600px;
     left: 0;
-    width: 100%; /* CORREÇÃO: Cobrir a tela toda */
-    height: 100%; /* CORREÇÃO: Cobrir a tela toda */
+    width: 900px; /* CORREÇÃO: Cobrir a tela toda */
+    height: 30px; /* CORREÇÃO: Cobrir a tela toda */
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 0;
     box-sizing: border-box;
 }
 
 .modal-conteudo {
     background-color: white;
-    padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 100%;
-    max-width: 500px; /* Um pouco menor para melhor leitura */
+    width: 900px;
+    max-width: 900px; /* Um pouco menor para melhor leitura */
     color: #333; /* Cor escura para texto em fundo branco */
 }
 
 .modal-conteudo p {
-    text-shadow: none; /* Remove sombra do texto dentro do modal */
-    margin: 0;
+    margin: 2px;
+    font-family: "Lobster Two", sans-serif;
 }
 
 .hidden {
@@ -210,17 +231,18 @@ p {
 
 #progresso-container {
     width: 95%;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top:-60px;
 }
 
 #progresso-texto {
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 #barra-progresso-container {
     width: 100%;
-    height: 10px;
+    height: 8px;
     background-color: #e0e0e0;
     border-radius: 10px;
     overflow: hidden;
@@ -240,11 +262,13 @@ p {
 
 footer {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
+    bottom: 40px;
+    left: 47.6%;
     transform: translateX(-50%);
-    width: 90%;
+    width: 840px;
     max-width: 840px;
+    height: 30px;
+    font-family: "Lobster Two", sans-serif;
 }
 
 /* Estilo combinado para os créditos */
@@ -259,5 +283,6 @@ footer {
 }
 
 #credits p, #creditsIndex p {
-    margin: 2px 0; /* Espaçamento menor para os créditos */
+    margin: 4px auto; /* Espaçamento menor para os créditos */
+    font-family: "Lobster Two", sans-serif;
 }
