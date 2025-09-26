@@ -1,0 +1,333 @@
+/*Estilos da página inicial do jogo MathQuest*/
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto+Mono:wght@100..900&display=swap");
+
+body {
+  display: flex;
+  overflow: hidden; /* Remove a barra de rolagem */
+  flex-direction: column;
+  min-height: 60vh;
+  margin-top: 5px;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url("FUNDO_TELA_MOVE.GIF");
+  background-size: cover;
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Evita que a imagem se repita */
+}
+
+header{
+  display: flex;
+  z-index: 1;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 0px auto;
+  font-family: "Lobster Two", sans-serif;
+  font-size: 50px;
+  color: rgb(245, 168, 25);
+  text-shadow: 10px 8px 1px rgba(10, 10, 0, 0.8); /* Adiciona sombra ao texto */
+}
+
+header:hover{
+    transform: scale(1.1);
+    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
+    animation: spin 5s linear infinite;
+}
+
+p{
+    font-family: "Roboto Mono", monospace;
+    font-size: 24px;
+    color: white;
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.9); /* Adiciona sombra ao texto */
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+.orientacao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 760px;
+    max-width: 760px;
+    height: 390px;
+    margin: 5px auto;
+    padding: 10px auto;
+    font-family: "Roboto Mono", monospace;
+    font-size: 20px;
+    color: white;
+    background-color: rgba(0, 255, 255, 0.337);
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.693);
+    border-radius: 10px;
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.9); /* Adiciona sombra ao texto */
+}
+
+.orientacaoIndex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 860px;
+    max-width: 860px;
+    height: 400px;
+    margin: 5px;
+    padding: 5px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 20px;
+    color: white;
+    background-color: rgba(0, 255, 255, 0.337);
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.693);
+    border-radius: 10px;
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.9); /* Adiciona sombra ao texto */
+}
+
+.orientacaoIndex:hover{
+    transform: scale(1);
+    box-shadow: 15px 15px 8px rgba(0, 0, 0, 0.693);
+    background-color: rgba(14, 52, 156, 0.821);
+    color: black;
+    text-shadow: 1px 4px 3px rgba(255, 255, 255, 0.9);
+    animation: spin 10s linear infinite;
+}
+
+#pergunta{
+    max-width: 100%;
+    font-family: "Bree Serif", serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: white;
+    text-shadow: 1px 4px 2px rgba(50, 3, 3, 0.9);
+}
+
+#alternativas{
+    width: 95%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 255, 0.337);
+}
+
+#credits {
+    position: absolute;
+    bottom: 20px; /* Adiciona um respiro da base da tela */
+    left: 50%; /* Move o início do elemento para o meio da tela */
+    transform: translateX(-50%); /* Puxa o elemento para trás pela metade de sua própria largura */
+    
+    width: 760px; /* Largura que você definiu */
+    padding: 10px; /* Valor corrigido e mais equilibrado */
+    
+    /* Suas outras estilizações (cores, sombras, etc.) */
+    z-index: 1;
+    background-color: rgba(0, 255, 255, 0.337);
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.693);
+    border-radius: 10px;
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.9);
+    text-align: center;
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#creditsIndex {
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 5px auto;
+  background-color: rgba(0, 255, 255, 0.337);
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.693);
+  border-radius: 10px;
+  text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.9);
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-align: center;
+  color: aliceblue;
+  font-weight: bold;
+  width: 840px;
+  max-width: 840px;
+}
+
+button {
+    display: block;
+    margin: 10px;
+    color:aliceblue;
+    text-shadow: 1px 4px 2px rgba(0, 0, 0, 1);
+    border: none;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #2b2b3203;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 95%;
+}
+
+button:hover {
+    background-color: #1a2fe88b;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fontIndex{
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 4px 3px rgba(0, 0, 0, 0.9);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#btnIndex{
+ color: orange;
+ text-shadow: 1px 4px 2px rgba(0, 0, 0, 1);
+ font-family: "Playfair Display", serif;
+ font-size: 25px;
+ font-weight: bold;
+}
+
+/* Estilo para a imagem final (troféu ou outra) */
+.imagem-final {
+    width: 100px; /* Defina o tamanho que preferir */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-bottom: 15px; /* Adiciona um espaço abaixo da imagem */
+}
+
+/* CSS PARA O MODAL DE MENSAGEM (AJUSTADO) */
+
+/* O fundo escurecido (nenhuma alteração aqui) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 9cm;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* A caixa de mensagem em si (AJUSTADA) */
+.modal-conteudo {
+    background-color: white;
+    padding: 25px; /* Aumentei um pouco o padding para ficar mais agradável */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+
+    /* --- LÓGICA PRINCIPAL AQUI --- */
+    width: 90%; /* Ocupa 90% da tela em telas pequenas */
+    max-width: 860px; /* Mas nunca ultrapassa 860px em telas grandes */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+/* O parágrafo dentro do modal (AJUSTADO) */
+.modal-conteudo p {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Classe para esconder/mostrar o modal */
+.hidden {
+    display: none;
+}
+
+/* CSS PARA A BARRA DE PROGRESSO */
+
+#progresso-container {
+    width: 100%;
+    padding: 0 10px; /* Alinha com o resto do fieldset se ele tiver padding */
+    margin-bottom: 5px; /* Espaço antes da pergunta */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura */
+}
+
+#progresso-texto {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#barra-progresso-container {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden; /* Garante que a barra interna fique com as bordas arredondadas */
+}
+
+#barra-progresso {
+    height: 100%;
+    width: 0%; /* Começa com 0% de largura */
+    background-color: #4caf50; /* Verde progresso */
+    border-radius: 10px;
+    /* Efeito de transição suave quando a largura mudar! */
+    transition: width 0.5s ease-in-out;
+}
+
+/* =================================================================== */
+/* FORÇAR ROTAÇÃO E AJUSTAR ESCALA EM TELAS PEQUENAS (MODO RETRATO)      */
+/* =================================================================== */
+
+/* Aplica a regra para todas as telas de até 768px em modo retrato */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+
+/* ================================================= */
+  /* PASSO 1: REMOVE O FUNDO ESTÁTICO DO HTML          */
+  /* ================================================= */
+  html {
+    background: none !important; /* Força a remoção de qualquer fundo */
+    background-color: #000; /* Adiciona um fundo preto para preencher */
+  }
+  
+body {
+    /* Congela o tamanho original da tela, invertendo os eixos */
+    width: 100vh;
+    height: 100vw;
+
+    /* Posicionamento e origem para centralização */
+    position: absolute;
+    margin-top: 100px;
+    left: 50%;
+    transform-origin: center;
+
+    /* Posicionamento e origem para centralização */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: center;
+    transform: rotate(90deg) scale(0.8) translate(-1%, -1%);
+    
+    /* Desabilita o scroll */
+    overflow: hidden;
+
+    /* --- APLIQUE SUA IMAGEM DE FUNDO AQUI --- */
+    background-image: url('./FUNDO_TELA_MOVE_GIRADA.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+  header, h2, h3, h4, p, .fontIndex, #pergunta, button, #credits, #creditsIndex {
+    font-size: 100%;
+  }
+
+  #credits{
+    width: 90vh;
+    margin-bottom: -150px;
+    left: 50%;
+  }
+
+}
