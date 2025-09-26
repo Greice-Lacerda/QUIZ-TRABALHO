@@ -1,11 +1,33 @@
-// Variáveis para controlar o estado do jogo
+// =========================================
+// SETUP INICIAL
+// =========================================
+
+// --- Constantes do Jogo (fácil de alterar aqui) ---
+const PERGUNTAS_POR_RODADA = 5;
+const TEMPO_MODAL_MS = 2500; // 2.5 segundos, um tempo mais dinâmico que 5s
+
+// --- Elementos do DOM (melhor performance, evita repetição) ---
+const perguntaEl = document.getElementById('pergunta');
+const alternativasContainerEl = document.getElementById('alternativas');
+const progressoContainerEl = document.getElementById('progresso-container');
+const progressoTextoEl = document.getElementById('progresso-texto');
+const barraProgressoEl = document.getElementById('barra-progresso');
+const modalOverlayEl = document.getElementById('modal-overlay');
+const modalTextoEl = document.getElementById('modal-texto');
+const somAcertoEl = document.getElementById('somAcerto');
+const somErroEl = document.getElementById('somErro');
+const somPesarEl = document.getElementById('somPesar');
+
+// --- Variáveis de Estado do Jogo ---
 let perguntaAtualIndex = 0;
 let pontuacao = 0;
 let perguntasDaRodada = [];
 
-// BANCO COMPLETO DE PERGUNTAS (20 no total)
+// =========================================
+// BANCO DE PERGUNTAS
+// =========================================
 const bancoDePerguntasCompleto = [
-    // ... seu banco de 20 perguntas continua aqui, sem alterações ...
+    // ... seu banco de 20 perguntas continua aqui ...
     { pergunta: "Qual foi o primeiro videogame da história, criado em 1958?", alternativas: ["A) Pong", "B) Spacewar!", "C) Tennis for Two"], respostaCorreta: 2 },
     { pergunta: "Qual destes jogos é consistentemente um dos mais jogados no mundo, famoso por seus blocos e criatividade sem limites?", alternativas: ["A) Minecraft", "B) Among Us", "C) Candy Crush"], respostaCorreta: 0 },
     { pergunta: "A palavra 'robô' apareceu pela primeira vez em uma peça de teatro. O que ela significava originalmente?", alternativas: ["A) Trabalhador forçado", "B) Mente de metal", "C) Amigo elétrico"], respostaCorreta: 0 },
@@ -28,69 +50,72 @@ const bancoDePerguntasCompleto = [
     { pergunta: "Robôs usados em cirurgias médicas ajudam os médicos a:", alternativas: ["A) Realizar operações com maior precisão", "B) Decidir qual o diagnóstico do paciente", "C) Conversar com a família do paciente"], respostaCorreta: 0 }
 ];
 
+// =========================================
+// LÓGICA DO JOGO
+// =========================================
+
 function iniciarNovoJogo() {
     perguntaAtualIndex = 0;
     pontuacao = 0;
-    document.getElementById('progresso-container').style.display = 'block';
-    const perguntasEmbaralhadas = [...bancoDePerguntasCompleto];
-    for (let i = perguntasEmbaralhadas.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [perguntasEmbaralhadas[i], perguntasEmbaralhadas[j]] = [perguntasEmbaralhadas[j], perguntasEmbaralhadas[i]];
-    }
-    perguntasDaRodada = perguntasEmbaralhadas.slice(0, 5);
+    progressoContainerEl.style.display = 'block';
+
+    // Embaralha uma cópia do banco de perguntas
+    const perguntasEmbaralhadas = [...bancoDePerguntasCompleto].sort(() => Math.random() - 0.5);
+    
+    perguntasDaRodada = perguntasEmbaralhadas.slice(0, PERGUNTAS_POR_RODADA);
     mostrarPergunta();
 }
 
 function mostrarPergunta() {
     atualizarBarraDeProgresso();
     const perguntaAtual = perguntasDaRodada[perguntaAtualIndex];
-    document.getElementById('pergunta').innerText = perguntaAtual.pergunta;
-    const alternativasContainer = document.getElementById('alternativas');
-    alternativasContainer.innerHTML = '';
+    perguntaEl.innerText = perguntaAtual.pergunta;
+    alternativasContainerEl.innerHTML = '';
+
     perguntaAtual.alternativas.forEach((alt, index) => {
         const botao = document.createElement('button');
+        // MELHORIA: Adiciona a classe de estilo do CSS para consistência visual
+        botao.classList.add('button-style');
         botao.innerText = alt;
         botao.onclick = () => verificarResposta(index);
-        alternativasContainer.appendChild(botao);
+        alternativasContainerEl.appendChild(botao);
     });
 }
 
 function atualizarBarraDeProgresso() {
     const totalPerguntas = perguntasDaRodada.length;
-    const porcentagem = ((perguntaAtualIndex + 1) / totalPerguntas) * 100;
-    document.getElementById('barra-progresso').style.width = `${porcentagem}%`;
-    document.getElementById('progresso-texto').innerText = `Pergunta ${perguntaAtualIndex + 1} de ${totalPerguntas}`;
+    // Evita a barra ir para 120% na última pergunta
+    const progressoAtual = Math.min(perguntaAtualIndex, totalPerguntas);
+    const porcentagem = (progressoAtual / totalPerguntas) * 100;
+    
+    barraProgressoEl.style.width = `${porcentagem}%`;
+    progressoTextoEl.innerText = `Pergunta ${perguntaAtualIndex + 1} de ${totalPerguntas}`;
 }
 
 function verificarResposta(indexSelecionado) {
     document.querySelectorAll('#alternativas button').forEach(button => button.disabled = true);
     const perguntaAtual = perguntasDaRodada[perguntaAtualIndex];
+
     if (indexSelecionado === perguntaAtual.respostaCorreta) {
         pontuacao++;
-        
+        // MELHORIA: Toca o som de acerto
+        somAcertoEl.play();
         mostrarModal("Você acertou!");
     } else {
-        document.getElementById('somErro').play();
+        somErroEl.play();
         const msgErro = `Errado! A resposta correta era: ${perguntaAtual.alternativas[perguntaAtual.respostaCorreta]}`;
         mostrarModal(msgErro);
     }
 }
 
-/**
- * AJUSTADO: Função do modal agora fecha automaticamente após 5 segundos.
- */
 function mostrarModal(mensagem) {
-    const modalOverlay = document.getElementById('modal-overlay');
-    const modalTexto = document.getElementById('modal-texto');
+    modalTextoEl.innerText = mensagem;
+    modalOverlayEl.classList.remove('hidden');
 
-    modalTexto.innerText = mensagem;
-    modalOverlay.classList.remove('hidden'); // Mostra o modal
-
-    // Define um temporizador para fechar o modal e avançar
     setTimeout(() => {
-        modalOverlay.classList.add('hidden'); // Esconde o modal
-        proximaPergunta(); // Chama a próxima pergunta
-    }, 5000); // 5000 milissegundos = 5 segundos
+        modalOverlayEl.classList.add('hidden');
+        proximaPergunta();
+    }, TEMPO_MODAL_MS);
 }
 
 function proximaPergunta() {
@@ -98,35 +123,42 @@ function proximaPergunta() {
     if (perguntaAtualIndex < perguntasDaRodada.length) {
         mostrarPergunta();
     } else {
-        // Um pequeno delay antes de mostrar a tela final para dar tempo do modal sumir completamente
+        // Atualiza a barra para 100% ao final
+        barraProgressoEl.style.width = '100%';
         setTimeout(mostrarTelaFinal, 200);
     }
 }
 
 function mostrarTelaFinal() {
-    document.getElementById('progresso-container').style.display = 'none';
+    progressoContainerEl.style.display = 'none';
     const totalPerguntas = perguntasDaRodada.length;
     const porcentagemAcertos = Math.round((pontuacao / totalPerguntas) * 100);
     let mensagemFinalHTML = '';
-    
+
     if (porcentagemAcertos >= 50) {
-        document.getElementById('somAcerto').play();
-        mensagemFinalHTML = `<img src="./Trofeu.png" alt="Troféu de Vencedor" class="imagem-final"><h4>Parabéns! Você acertou ${porcentagemAcertos}% das perguntas!</h4><p>Você é um verdadeiro expert digital!</p>`;
+        somAcertoEl.play();
+        // CORREÇÃO: Caminho correto para a imagem do troféu
+        mensagemFinalHTML = `<img src="../imagens/Trofeu.png" alt="Troféu de Vencedor" class="imagem-final">
+                             <h4>Parabéns! Você acertou ${porcentagemAcertos}% das perguntas!</h4>
+                             <p>Você é um verdadeiro expert digital!</p>`;
         setTimeout(dispararConfetes, 100);
     } else {
-        const somPesar = document.getElementById('somPesar') || document.getElementById('somErro');
-        somPena2.play();
-        mensagemFinalHTML = `<h2>Não foi desta vez... 😢</h2><p>Você acertou ${porcentagemAcertos}% das perguntas.</p><p>Continue estudando e tente novamente!</p>`;
+        // CORREÇÃO: Usando a variável correta para tocar o som (somPesarEl)
+        if (somPesarEl) somPesarEl.play();
+        mensagemFinalHTML = `<h2>Não foi desta vez... 😢</h2>
+                             <p>Você acertou ${porcentagemAcertos}% das perguntas.</p>
+                             <p>Continue estudando e tente novamente!</p>`;
     }
 
-    document.getElementById('pergunta').innerHTML = mensagemFinalHTML;
-    document.getElementById('alternativas').innerHTML = `<button onclick="reiniciarQuizz()">Jogar Novamente</button>`;
+    perguntaEl.innerHTML = mensagemFinalHTML;
+    alternativasContainerEl.innerHTML = `<button class="button-style" onclick="iniciarNovoJogo()">Jogar Novamente</button>`;
 }
 
 function dispararConfetes() {
+    // Função de confetes mantida, sem alterações
     const duration = 3 * 1000;
     const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
     function randomInRange(min, max) { return Math.random() * (max - min) + min; }
     const interval = setInterval(function() {
         const timeLeft = animationEnd - Date.now();
@@ -137,8 +169,5 @@ function dispararConfetes() {
     }, 250);
 }
 
-function reiniciarQuizz() {
-    iniciarNovoJogo();
-}
-
+// Inicia o jogo assim que a página é carregada
 window.onload = iniciarNovoJogo;

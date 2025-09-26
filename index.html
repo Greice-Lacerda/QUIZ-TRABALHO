@@ -4,44 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizz - Página Inicial do Quizz </title>
-    <link rel="stylesheet" href="estilosQuizz.css">
-    <meta name="description" content="Um jogo educativo para aprender sobre triangulação.">
-    <meta name="keywords" content="triangulação, educação, jogo, geometria">
+    <title>Quizz - Dilema Digital</title>
+    <link rel="stylesheet" href="estilos/estilosQuizz.css">
+    <meta name="description" content="Um jogo educativo para aprender sobre o mundo dos games e da IA.">
+    <meta name="keywords" content="quiz, games, IA, inteligência artificial, tecnologia, jogo">
 </head>
 
 <body>
     <header>
         <h1>Quizz - Dilema Digital</h1>
+        <p>Quão profundo você conhece o mundo dos games e da IA?</p>
     </header>
 
     <main id="game-container">
-        <div>
-            <p>Quão profundo você conhece o mundo dos games e da IA?</p>
-        </div>
-        <aside id="orientacao">
-            <fieldset class="orientacaoIndex">
-                <h2 class="fontIndex">Olá, pioneiros digitais e exploradores do futuro! </h2>
+        <section class="orientacaoIndex">
+            <h2>Olá, pioneiros digitais e exploradores do futuro!</h2>
 
-                <h5 class="fontIndex">Sejam muito bem-vindos ao desafio que vai testar os limites do seu conhecimento e acelerar seus neurônios!</h5>
+            <p class="fontIndex">Sejam muito bem-vindos ao desafio que vai testar os limites do seu conhecimento e
+                acelerar seus neurônios!</p>
+            <p class="fontIndex">Este não é apenas um quiz. É um campo de batalha de conhecimento, uma arena onde sua
+                paixão por tecnologia e sua astúcia de jogador serão colocadas à prova. Cada pergunta é um novo nível,
+                cada resposta correta é um achievement desbloqueado!</p>
+            <p class="fontIndex">Clique em "Iniciar Quizz" para começar e boa sorte!</p>
 
-                <h5 class="fontIndex">Este não é apenas um quiz. É um campo de batalha de conhecimento, uma arena onde sua paixão por tecnologia e sua astúcia
-                de jogador serão colocadas à prova. Cada pergunta é um novo nível, cada resposta correta é um achievement desbloqueado!</h5>
-                
-                <h5 class="fontIndex">Clique em "Iniciar Quizz" para começar e boa sorte!</h5>
-
-                <button id="btnIndex" onclick="window.location.href='quizz.html'">Iniciar o Quizz</button>
-
-            </fieldset>
-        </aside>
+            <a href="pages/quizz.html" class="button-link" id="btnIndex">Iniciar o Quizz</a>
+        </section>
     </main>
-    <script src="quizz.js"></script>
+
     <footer>
-        <fieldset id="creditsIndex">
-            <legend>Créditos</legend>
-            Grupo A - @2025
-        </fieldset>
+        <div id="creditsIndex">
+            <p>Créditos</p>
+            <p>Grupo A - @2025</p>
+        </div>
     </footer>
+
+    <script src="quizz.js"></script>
 </body>
 
 </html>
